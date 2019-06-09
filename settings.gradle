@@ -26,3 +26,6 @@ project(':hystrix-contrib/hystrix-yammer-metrics-publisher').name = 'hystrix-yam
 project(':hystrix-contrib/hystrix-network-auditor-agent').name = 'hystrix-network-auditor-agent'
 project(':hystrix-contrib/hystrix-javanica').name = 'hystrix-javanica'
 project(':hystrix-contrib/hystrix-junit').name = 'hystrix-junit'
+include 'core-sentinel'
+findProject(':core-sentinel')?.name = 'core-sentinel '
+
