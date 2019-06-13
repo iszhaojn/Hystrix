@@ -756,6 +756,7 @@ import java.util.concurrent.atomic.AtomicReference;
      *             if getFallback() fails (throws an Exception) or is rejected by the semaphore
      */
     private Observable<R> getFallbackOrThrowException(final AbstractCommand<R> _cmd, final HystrixEventType eventType, final FailureType failureType, final String message, final Exception originalException) {
+
         final HystrixRequestContext requestContext = HystrixRequestContext.getContextForCurrentThread();
         long latency = System.currentTimeMillis() - executionResult.getStartTimestamp();
         // record the executionResult
@@ -988,6 +989,7 @@ import java.util.concurrent.atomic.AtomicReference;
     }
 
     private Observable<R> handleThreadPoolRejectionViaFallback(Exception underlying) {
+
         eventNotifier.markEvent(HystrixEventType.THREAD_POOL_REJECTED, commandKey);
         threadPool.markThreadRejection();
         // use a fallback instead (or throw exception if not implemented)

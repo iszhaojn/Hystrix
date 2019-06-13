@@ -287,6 +287,25 @@ public class ExecutionResult {
     }
 
     public ExecutionResult addEvent(int executionLatency, HystrixEventType eventType) {
+//        System.out.println("vvvvvvvvvv eventType=" + eventType);
+//        System.out.println("vvvvvvvvvv startTimestamp=" + startTimestamp);
+//        System.out.println("vvvvvvvvvv isResponseRejected=" + isResponseRejected());
+        if (eventType.equals(HystrixEventType.THREAD_POOL_REJECTED)){
+            System.err.println("vvvvvv startTimestamp= " + startTimestamp + " isResponseRejected=" + isResponseRejected()
+                    + " eventCounts=" + eventCounts
+                    + " eventType=" + eventType
+                    + " threadName=" + Thread.currentThread().getName()
+
+            );
+        }else {
+            System.out.println("vvvvvv startTimestamp= " + startTimestamp + " isResponseRejected=" + isResponseRejected()
+                    + " eventCounts=" + eventCounts
+                    + " eventType=" + eventType
+                    + " threadName=" + Thread.currentThread().getName()
+
+            );
+        }
+
         if (startTimestamp >= 0 && !isResponseRejected()) {
             return new ExecutionResult(eventCounts.plus(eventType), startTimestamp, executionLatency,
                     userThreadLatency, failedExecutionException, executionException,
